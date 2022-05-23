@@ -18,13 +18,14 @@ import org.junit.*;
 import java.util.*;
 
 public class MarkdownParseTest {
+    /** 
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
     }
-
     @Test
 
+    
     public void testFile() throws IOException{
         Path fileName = Path.of("test-file.md");
         int one = 1;
@@ -218,4 +219,20 @@ public class MarkdownParseTest {
     }
     */
 
+    @Test
+    public void testSnippet1() throws IOException{
+        String contents = Files.readString(Path.of("snippet1.md"));
+        assertEquals(List.of("google.com", "google.com", "ucsd.edu"), MarkdownParse.getLinks(contents));
+    }
+    @Test
+    public void testSnippet2() throws IOException{
+        String contents = Files.readString(Path.of("snippet2.md"));
+        assertEquals(List.of("a.com", "a.com(())", "example.com"), MarkdownParse.getLinks(contents));
+    }
+    @Test
+    public void testSnippet3() throws IOException{
+        String contents = Files.readString(Path.of("snippet3.md"));
+        assertEquals(List.of("https://www.twitter.com", "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule",
+         "https://cse.ucsd.edu/"), MarkdownParse.getLinks(contents));
+    }
 }
